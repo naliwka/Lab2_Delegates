@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Lab_2_2
 {
@@ -10,6 +9,23 @@ namespace Lab_2_2
     {
         static void Main(string[] args)
         {
+            List<Employee> employees = new List<Employee>();
+
+            using (StreamReader reader = new StreamReader("employee.txt"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] parts = line.Split(' ');
+                    employees.Add(new Employee { Name = parts[0], Salary = int.Parse(parts[1])});
+                } 
+            }
+            List<Employee> sortedEmployees = employees.OrderBy(e => e.Salary).ToList();
+
+            foreach (Employee employee in sortedEmployees)
+            {
+                Console.WriteLine($"{employee.Name} - {employee.Salary}");
+            }
         }
     }
 }
