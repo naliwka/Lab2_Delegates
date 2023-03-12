@@ -10,7 +10,7 @@ namespace Lab_2_2
         static void Main(string[] args)
         {
             List<Employee> employees = new List<Employee>();
-
+            // Read list of employees from file
             using (StreamReader reader = new StreamReader("employee.txt"))
             {
                 while (!reader.EndOfStream)
@@ -20,6 +20,7 @@ namespace Lab_2_2
                     employees.Add(new Employee { Name = parts[0], Salary = int.Parse(parts[1])});
                 } 
             }
+            // Sort employees by their salary
             List<Employee> sortedEmployees = employees.OrderBy(e => e.Salary).ToList();
 
             foreach (Employee employee in sortedEmployees)
